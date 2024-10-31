@@ -3,7 +3,6 @@ install:
 	poetry config virtualenvs.create true
 	poetry config virtualenvs.in-project true
 	poetry install
-	source .venv/bin/activate
 
 install-deploy:
 	poetry config virtualenvs.create false
@@ -24,5 +23,5 @@ test:
 	coverage html
 
 setup:
+	cp .env.example .env
 	docker compose up -d --build
-	python manage.py generatewallets

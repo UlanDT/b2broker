@@ -2,5 +2,7 @@
 
 ### Setup project
 ```
-1) docker compose up -d --build
+1) make install
+2) source .venv/bin/activate
+3) make setup
 ```

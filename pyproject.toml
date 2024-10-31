@@ -1,0 +1,81 @@
+[tool.poetry]
+name = "b2broker"
+version = "0.0.1"
+description = "B2broker assessment test"
+authors = ["Ulanbek Dokturbek uulu <ulanbek.dt94@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11.4"
+Django = "*"
+django-environ = "*"
+django-stubs = "*"
+djangorestframework = "*"
+drf-yasg = "*"
+mysqlclient = "*"
+Faker = "*"
+django-filter = "*"
+
+[tool.poetry.group.qa.dependencies]
+ruff = "*"
+pytest = "*"
+pytest-cov = "*"
+pytest-django = "*"
+mypy = "*"
+black = "*"
+model-bakery = "*"
+
+
+[tool.poetry.group.local.dependencies]
+ipdb = "*"
+ipython = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 120
+exclude = '(\.git|\.cache|\.mypy_cache|\.pytest_cache|\.tox|\.venv|\.idea|__pycache__|migrations|htmlcov)'
+
+[tool.mypy]
+plugins = ["mypy_django_plugin.main"]
+strict = true
+ignore_missing_imports = true
+exclude = '(\.git|\.cache|\.mypy_cache|\.pytest_cache|\.tox|\.venv|\.idea|__pycache__|migrations|htmlcov)'
+disallow_subclassing_any = false
+disallow_untyped_decorators = false
+
+[tool.django-stubs]
+django_settings_module = "core.settings"
+strict_settings = true
+
+[tool.ruff]
+lint.select = ["ALL"]
+line-length = 120
+lint.ignore = [
+    "COM812",
+    "ISC001",
+    "D203", # 1 blank line required before class docstring - conflicts with D211
+    "D213", # Multi-line docstring summary should start at the second line - conflicts with D212
+]
+extend-exclude = [".git", ".cache", ".mypy_cache", ".pytest_cache", ".tox", ".venv", ".idea", "**/__pycache__/**", "**/migrations/**", "htmlcov", "manage.py", "wsgi.py"]
+
+[tool.coverage.run]
+branch = true
+omit = [
+    "*/migrations/*",
+    "*/tests/*",
+    "*/core/*",
+    "*/manage.py",
+    "*/apps.py",
+    "*/admin.py",
+    "*/models.py",
+]
+
+[tool.coverage.report]
+skip_empty = true
+skip_covered = true
+exclude_lines = [
+    "raise NotImplementedError",
+]
